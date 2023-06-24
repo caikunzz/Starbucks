@@ -2,8 +2,15 @@ html,
 body {
   width: 100vw;
   min-height: 100vh;
-  height: 100vh;
   background: #f7f7f7;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  position: relative;
+  padding-bottom: 15vw;
 }
 .nav-top {
   box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.3);
@@ -249,4 +256,28 @@ body {
   color: rgba(0, 0, 0, 0.38);
   cursor: not-allowed;
   border-radius: 48px;
+}
+.footer {
+  position: absolute;
+  box-sizing: border-box;
+  padding: 0 1rem;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  height: 15vw;
+  background-color: #fff;
+}
+.footer ul {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+.footer ul li a {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.8rem;
 }
