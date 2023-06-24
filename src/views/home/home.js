@@ -1,12 +1,4 @@
 import './home.css';
-// import axios from 'axios';
-// axios
-//   .get('/bff/app-provision-api/default/banner', {
-//     params: {
-//       bannerType: 'tmall-banner',
-//     },
-//   })
-//   .then((res) => console.log(res));
 
 var imgsx = document.querySelectorAll('li>img');
 var uls = document.querySelector('ul');
