@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
   <title>Document</title>
   <link rel="stylesheet" href="https://unpkg.com/swiper@6.8.0/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="./home.css">
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper@6.8.0/swiper-bundle.min.js"></script>
 </head>
 
 <body>
@@ -163,44 +164,31 @@
     <div class="footer">
       <div class="footer_fang">
         <img src="https://www-static.chinacdn.starbucks.com.cn/prod/assets/icons/icon-home-active.svg" alt="">
-        <p><a href="../home/home.html"> 主 页 </a></p>
+        <p><a href="./index.html"> 主 页 </a></p>
       </div>
       <div class="footer_fang">
         <img src="https://www-static.chinacdn.starbucks.com.cn/prod/assets/icons/icon-stores.svg" alt="">
-        <p><a href="../store/store.html"> 门 店 </a></p>
+        <p><a href="./store.html"> 门 店 </a></p>
       </div>
       <div class="footer_fang">
         <img src="https://www-static.chinacdn.starbucks.com.cn/prod/assets/icons/icon-account.svg" alt="">
-        <p><a href="../account/account.html">我的账户</a></p>
+        <p><a href="./account.html">我的账户</a></p>
       </div>
       <div class="footer_fang">
         <img src="https://www-static.chinacdn.starbucks.com.cn/prod/assets/icons/icon-menu.svg" alt="">
-        <p><a href="../menu/menu.html"> 菜 单 </a></p>
+        <p><a href="./menu.html"> 菜 单 </a></p>
       </div>
       <div class="footer_fang">
         <img src="https://www-static.chinacdn.starbucks.com.cn/prod/assets/icons/icon-more.svg" alt="">
-        <p><a href="../more/more.html"> 更 多 </a></p>
+        <p><a href="./more.html"> 更 多 </a></p>
       </div>
     </div>
   </div>
-  <!-- Swiper JS -->
-  <script src="https://unpkg.com/swiper@6.8.0/swiper-bundle.min.js"></script>
+
 
   <!-- Initialize Swiper -->
-  <script>
-    var swiper = new Swiper(".mySwiper", {
-      loop: true,
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      // 设置自动轮播
-      autoplay: {
-        delay: 2000, // 轮播间隔时间，单位为毫秒
-      },
-    });
-  </script>
-  <script src="./home.js"></script>
+
+  <!-- <script src="./home.js"></script> -->
 </body>
 
 </html>
