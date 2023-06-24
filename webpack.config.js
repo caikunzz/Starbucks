@@ -53,7 +53,7 @@ module.exports = {
     lodash: '_',
   },
   devServer: {
-    open: ['/reg.html'],
+    open: ['/home.html'],
     // 配置前端请求代理
     proxy: {
       '^/api': {
