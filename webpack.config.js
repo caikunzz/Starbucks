@@ -2,30 +2,28 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackBar = require('webpackbar');
 const path = require('path');
-const glob = require('glob');
-const views = glob
-  .sync(path.resolve(__dirname, './src/views/*/*.html'))
-  .reduce((prev, current) => {
-    const key = current.match(/\/views\/(\w+)\//)[1];
-    prev[key] = current.replace('.html', '');
-    return prev;
-  }, {});
 module.exports = {
   entry: {
-    ...views,
-    common: './src/index.js',
+    home: './src/views/home/home.js',
+    menu: './src/views/menu/menu.js',
+    more: './src/views/more/more.js',
+    store: './src/views/store/store.js',
+    account: './src/views/account/account.js',
+    coummon: './src/index.js',
   },
   devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: '[name].[fullhash:8].js',
+    filename: 'js/[name].[fullhash:8].js',
   },
   module: {
     rules: [
+      // css
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
+      // less
       {
         test: /\.less$/,
         use: [
@@ -35,9 +33,22 @@ module.exports = {
           'less-loader',
         ],
       },
+      // 字体
       {
         test: /\.(woff | eot | ttf | otf | svg)$/,
         type: 'asset/resource',
+      },
+      // 图片
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name][ext]',
+        },
+      },
+      {
+        test: /\.(htm|html)$/,
+        loader: 'html-withimg-loader',
       },
     ],
   },
@@ -52,6 +63,7 @@ module.exports = {
     lodash: '_',
   },
   devServer: {
+    // index: path.resolve(__dirname, 'home.html'),
     open: ['/home.html'],
     // 配置前端请求代理
     proxy: {
@@ -70,25 +82,37 @@ module.exports = {
   plugins: [
     new WebpackBar(),
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash:8].css',
+      filename: 'style/[name].[contenthash:8].css',
     }),
-    // new HtmlWebpackPlugin({
-    //   template: './public/index.html',
-    //   cdn: {
-    //     script: [
-    //       'https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js',
-    //       'https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.core.min.js',
-    //     ],
-    //     style: [],
-    //   },
-    // }),
-    ...Object.entries(views).map(
-      ([key, value]) =>
-        new HtmlWebpackPlugin({
-          template: value.replace(/$/, '.html'),
-          chunks: ['common', key],
-          filename: `${key}.html`,
-        })
-    ),
+    new HtmlWebpackPlugin({
+      inject: 'body',
+      template: './src/views/home/home.html',
+      filename: 'home.html',
+      chunks: ['common', 'home'],
+    }),
+    new HtmlWebpackPlugin({
+      inject: 'body',
+      template: './src/views/account/account.html',
+      filename: 'account.html',
+      chunks: ['common', 'account'],
+    }),
+    new HtmlWebpackPlugin({
+      inject: 'body',
+      filename: 'menu.html',
+      template: './src/views/menu/menu.html',
+      chunks: ['common', 'menu'],
+    }),
+    new HtmlWebpackPlugin({
+      inject: 'body',
+      filename: 'more.html',
+      template: './src/views/more/more.html',
+      chunks: ['common', 'more'],
+    }),
+    new HtmlWebpackPlugin({
+      inject: 'body',
+      filename: 'store.html',
+      template: './src/views/store/store.html',
+      chunks: ['common', 'store'],
+    }),
   ],
 };

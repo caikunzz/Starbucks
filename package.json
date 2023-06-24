@@ -1,13 +1,17 @@
 {
-  "name": "code123",
+  "name": "code",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env NODE_ENV=development npx webpack-dev-server --config=webpack.config.js",
     "prebuild": "rimraf dist",
-    "build": "cross-env NODE_ENV=production npx webpack",
+    "build": "cross-env NODE_ENV=production npx webpack --config=webpack.config.js",
+    "init:husky": "npx husky-init && npm install",
+    "init:commitizen": "npm install commitizen -D && npx commitizen init cz-conventional-changelog --save-dev --save-exact && npx commitizen init cz-customizable --save-dev --save-exact --force",
+    "init:commitlint": "npm i @commitlint/config-conventional @commitlint/cli -D && echo 'module.exports = {extends: [\"@commitlint/config-conventional\"]}' > commitlint.config.js && npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'",
+    "init": "npm run init:husky && npm run init:commitizen && npm run init:commitlint",
     "prepare": "husky install"
   },
   "author": "",
@@ -15,12 +19,18 @@
   "dependencies": {
     "axios": "^1.4.0",
     "eslint-import-resolver-webpack": "^0.13.2",
+    "html-withimg-loader": "^0.1.16",
     "jquery": "^3.7.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "swiper": "^9.4.1"
   },
   "config": {
+    "port": 3000,
     "commitizen": {
       "path": "./node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": "./.config/.cz-config.js"
     }
   },
   "devDependencies": {
