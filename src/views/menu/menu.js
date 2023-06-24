@@ -1,3 +1,4 @@
+import './menu.css'
 let list;
 let beverag = ['饮料', '美食', '咖啡商品', '商品'];
 let beverage = [
@@ -59,7 +60,7 @@ window.addEventListener('resize', () => {
   }
 });
 const xhr = new XMLHttpRequest(); // 创建 XMLHttpRequest 对象
-const url = './menu.json'; // 远程数据的 URL 地址
+const url = './76b83667746aab581db3.json'; // 远程数据的 URL 地址
 let arr = []; //json数据
 xhr.open('GET', url);
 xhr.send();
