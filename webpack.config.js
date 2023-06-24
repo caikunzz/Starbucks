@@ -12,6 +12,7 @@ module.exports = {
     more:'./src/views/more/more.js',
     store:'./src/views/store/store.js',
     test:'./src/views/test/test.js',
+    reg:'./src/views/reg/reg.js',
     common: './src/index.js',
   },
   devtool: 'source-map',
@@ -52,7 +53,7 @@ module.exports = {
     lodash: '_',
   },
   devServer: {
-    open: ['/account.html'],
+    open: ['/reg.html'],
     // 配置前端请求代理
     proxy: {
       '^/api': {
@@ -107,6 +108,12 @@ module.exports = {
       inject:'head',
       chunks: ['common', 'test'],
       filename:'test.html'
+    }),
+    new HtmlWebpackPlugin({
+      template:'./src/views/reg/reg.html',
+      inject:'head',
+      chunks: ['common', 'reg'],
+      filename:'reg.html'
     }),
   ],
 };
