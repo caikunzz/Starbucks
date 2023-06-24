@@ -2,31 +2,28 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackBar = require('webpackbar');
 const path = require('path');
-const { head } = require('lodash');
-
 module.exports = {
   entry: {
-    account:'./src/views/account/account.js',
-    home:'./src/views/home/home.js',
-    menu:'./src/views/menu/menu.js',
-    more:'./src/views/more/more.js',
-    store:'./src/views/store/store.js',
-    test:'./src/views/test/test.js',
-    reg:'./src/views/reg/reg.js',
-    common: './src/index.js',
+    home: './src/views/home/home.js',
+    menu: './src/views/menu/menu.js',
+    more: './src/views/more/more.js',
+    store: './src/views/store/store.js',
+    account: './src/views/account/account.js',
+    coummon: './src/index.js',
   },
   devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: '[name].[fullhash:8].js',
-    clean:true,
+    filename: 'js/[name].[fullhash:8].js',
   },
   module: {
     rules: [
+      // css
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
+      // less
       {
         test: /\.less$/,
         use: [
@@ -36,9 +33,22 @@ module.exports = {
           'less-loader',
         ],
       },
+      // 字体
       {
         test: /\.(woff | eot | ttf | otf | svg)$/,
         type: 'asset/resource',
+      },
+      // 图片
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name][ext]',
+        },
+      },
+      {
+        test: /\.(htm|html)$/,
+        loader: 'html-withimg-loader',
       },
     ],
   },
@@ -53,6 +63,7 @@ module.exports = {
     lodash: '_',
   },
   devServer: {
+    // index: path.resolve(__dirname, 'home.html'),
     open: ['/home.html'],
     // 配置前端请求代理
     proxy: {
@@ -71,49 +82,37 @@ module.exports = {
   plugins: [
     new WebpackBar(),
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash:8].css',
+      filename: 'style/[name].[contenthash:8].css',
     }),
     new HtmlWebpackPlugin({
-      template:'./src/views/account/account.html',
-      inject:'head',
-      chunks: ['common', 'account'],
-      filename:'account.html'
-    }),
-    new HtmlWebpackPlugin({
-      template:'./src/views/home/home.html',
-      inject:'head',
+      inject: 'body',
+      template: './src/views/home/home.html',
+      filename: 'home.html',
       chunks: ['common', 'home'],
-      filename:'home.html'
     }),
     new HtmlWebpackPlugin({
-      template:'./src/views/menu/menu.html',
-      inject:'head',
+      inject: 'body',
+      template: './src/views/account/account.html',
+      filename: 'account.html',
+      chunks: ['common', 'account'],
+    }),
+    new HtmlWebpackPlugin({
+      inject: 'body',
+      filename: 'menu.html',
+      template: './src/views/menu/menu.html',
       chunks: ['common', 'menu'],
-      filename:'menu.html'
     }),
     new HtmlWebpackPlugin({
-      template:'./src/views/more/more.html',
-      inject:'head',
+      inject: 'body',
+      filename: 'more.html',
+      template: './src/views/more/more.html',
       chunks: ['common', 'more'],
-      filename:'more.html'
     }),
     new HtmlWebpackPlugin({
-      template:'./src/views/store/store.html',
-      inject:'head',
+      inject: 'body',
+      filename: 'store.html',
+      template: './src/views/store/store.html',
       chunks: ['common', 'store'],
-      filename:'store.html'
-    }),
-    new HtmlWebpackPlugin({
-      template:'./src/views/test/test.html',
-      inject:'head',
-      chunks: ['common', 'test'],
-      filename:'test.html'
-    }),
-    new HtmlWebpackPlugin({
-      template:'./src/views/reg/reg.html',
-      inject:'head',
-      chunks: ['common', 'reg'],
-      filename:'reg.html'
     }),
   ],
 };
